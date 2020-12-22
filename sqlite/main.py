@@ -4,16 +4,16 @@ conn = sqlite3.connect('items.db')
 
 c = conn.cursor()
 
-c.execute("""CREATE TABLE items (
-            item_id INTEGER AUTO_INCREMENT NOT NULL,
-            name VARCHAR(30) NOT NULL, 
-            price DECIMAL NOT NULL,
-            URL VARCHAR(50) NOT NULL
-)""")
+'''
+c.execute("""DROP TABLE items""")
+'''
 
-items = [('')]
+item_list = [('1TB NVME SSD', 139.99, 'https://www.amazon.com/Samsung-970-EVO-1TB-MZ-V7E1T0BW/dp/B07BN217QG'), ('500GB NVME SSD', 59.99, 'https://www.amazon.com/Samsung-970-EVO-1TB-MZ-V7E1T0BW/dp/B07BN4NJ2J/'), ('250GB NVME SSD', 34.99, 'https://www.amazon.com/Inland-Professional-Internal-Express-Compatible/dp/B08KZS8N8Y/')]
 
-c.executemany("INSERT INTO items (?, ?, ?)", items)
+c.execute("SELECT * FROM items")
+
+print(c.fetchall())
+
 
 conn.commit()
 c.close()
